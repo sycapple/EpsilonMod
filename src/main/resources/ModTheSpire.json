@@ -1,0 +1,15 @@
+{
+  "modid": "EpsilonMod",
+  "name": "EpsilonMod",
+  "author_list": [
+    "yCAp1e"
+  ],
+  "description": "it is EpsilonMod",
+  "version": "0.0.1",
+  "sts_version": "12-22-2020",
+  "mts_version": "3.23.2",
+  "dependencies": [
+    "basemod",
+    "stslib"
+  ]
+}
