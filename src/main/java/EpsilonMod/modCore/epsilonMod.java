@@ -1,9 +1,11 @@
 package EpsilonMod.modCore;
 
 
+import EpsilonMod.cards.attack.yuriRecruit;
 import basemod.BaseMod;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.compression.lzma.Base;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -15,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 import EpsilonMod.util.epsilonModHelper;
 import EpsilonMod.enums.abstractCharacterEnum;
 import EpsilonMod.enums.libraryTypeEnum;
+import EpsilonMod.rewards.epsilonCardReward;
 import EpsilonMod.enums.abstractEpsilonRewardsEnum;
 import EpsilonMod.colorSet.epsilonColorSet;
 import EpsilonMod.enums.abstractCardEnum;
@@ -45,11 +48,11 @@ public class epsilonMod implements EditCardsSubscriber, EditCharactersSubscriber
     }
 
     public void receivePostInitialize() {
-        BaseMod.registerCustomReward(abstractEpsilonRewardsEnum.SOVIET_CARD_REWARD, (rewardSave) -> {
-            SovietCardReward db = new SovietCardReward();
+        BaseMod.registerCustomReward(abstractEpsilonRewardsEnum.EPSILON_CARD_REWARD, (rewardSave) -> {
+            epsilonCardReward db = new epsilonCardReward();
             return db;
         }, (customReward) -> new RewardSave(customReward.type.toString(), (String) null));
-        BaseMod.addEvent(SelfExplosiveCowEvent.ID, SelfExplosiveCowEvent.class);
+//        BaseMod.addEvent(SelfExplosiveCowEvent.ID, SelfExplosiveCowEvent.class);
     }
 
     public static void initialize() {
@@ -74,6 +77,7 @@ public class epsilonMod implements EditCardsSubscriber, EditCharactersSubscriber
     public void receiveEditCards() {
         // TODO 这里写添加你卡牌的代码
         logger.info("========================= 开始加载卡牌 =========================");
+        BaseMod.addCard(new yuriRecruit());
         logger.info("========================= 卡牌加载完毕 =========================");
     }
 
@@ -107,7 +111,7 @@ public class epsilonMod implements EditCardsSubscriber, EditCharactersSubscriber
             int var6 = keywords.length;
             for (int var7 = 0; var7 < var6; ++var7) {
                 Keyword keyword = var5[var7];
-                BaseMod.addKeyword("momod", keyword.NAMES[0], keyword.NAMES, keyword.DESCRIPTION);
+                BaseMod.addKeyword("EpsilonMod", keyword.NAMES[0], keyword.NAMES, keyword.DESCRIPTION);
             }
         }
         logger.info("========================= 关键词加载毕 =========================");
@@ -121,12 +125,12 @@ public class epsilonMod implements EditCardsSubscriber, EditCharactersSubscriber
             lang = "ENG";
         }
         // 这里添加注册本地化文本
-//        BaseMod.loadCustomStringsFile(CardStrings.class, MoModHelper.assetPath("localization/" + lang + "/cards.json"));
-//        BaseMod.loadCustomStringsFile(CharacterStrings.class, MoModHelper.assetPath("localization/" + lang + "/characters.json"));
-//        BaseMod.loadCustomStringsFile(UIStrings.class, MoModHelper.assetPath("localization/" + lang + "/ui.json"));
-//        BaseMod.loadCustomStringsFile(PowerStrings.class, MoModHelper.assetPath("localization/" + lang + "/powers.json"));
-//        BaseMod.loadCustomStringsFile(RelicStrings.class, MoModHelper.assetPath("localization/" + lang + "/relics.json"));
-//        BaseMod.loadCustomStringsFile(EventStrings.class, MoModHelper.assetPath("localization/" + lang + "/events.json"));
+        BaseMod.loadCustomStringsFile(CardStrings.class, epsilonModHelper.assetPath("localization/" + lang + "/cards.json"));
+        BaseMod.loadCustomStringsFile(CharacterStrings.class, epsilonModHelper.assetPath("localization/" + lang + "/characters.json"));
+        BaseMod.loadCustomStringsFile(UIStrings.class, epsilonModHelper.assetPath("localization/" + lang + "/ui.json"));
+        BaseMod.loadCustomStringsFile(PowerStrings.class, epsilonModHelper.assetPath("localization/" + lang + "/powers.json"));
+        BaseMod.loadCustomStringsFile(RelicStrings.class, epsilonModHelper.assetPath("localization/" + lang + "/relics.json"));
+        BaseMod.loadCustomStringsFile(EventStrings.class, epsilonModHelper.assetPath("localization/" + lang + "/events.json"));
     }
 }
 

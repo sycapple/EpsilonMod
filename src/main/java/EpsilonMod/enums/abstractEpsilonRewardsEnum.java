@@ -5,7 +5,7 @@ import com.megacrit.cardcrawl.rewards.RewardItem;
 
 public class abstractEpsilonRewardsEnum {
     @SpireEnum
-    public static RewardItem.RewardType SOVIET_CARD_REWARD;
+    public static RewardItem.RewardType EPSILON_CARD_REWARD;
 
     public abstractEpsilonRewardsEnum() {
     }

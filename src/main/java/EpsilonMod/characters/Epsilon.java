@@ -1,9 +1,12 @@
 package EpsilonMod.characters;
 
+import EpsilonMod.cards.attack.yuriRecruit;
 import EpsilonMod.enums.abstractCharacterEnum;
 import EpsilonMod.colorSet.epsilonColorSet;
 import EpsilonMod.util.epsilonModHelper;
 import EpsilonMod.enums.abstractCardEnum;
+import EpsilonMod.colorSet.epsilonColorSet;
+
 import basemod.abstracts.CustomPlayer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -18,6 +21,7 @@ import com.megacrit.cardcrawl.events.city.Vampires;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
+import com.megacrit.cardcrawl.relics.Vajra;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 
 import java.util.ArrayList;
@@ -48,7 +52,7 @@ public class Epsilon extends CustomPlayer {
     // 每个图层的旋转速度
     private static final float[] LAYER_SPEED = new float[]{-40.0F, -32.0F, 20.0F, -20.0F, 0.0F, -10.0F, -8.0F, 5.0F, -5.0F, 0.0F};
     // 人物的本地化文本，如卡牌的本地化文本一样，如何书写见下
-    private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(epsilonModHelper.makeID(Soviet.class.getSimpleName()));
+    private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(epsilonModHelper.makeID(Epsilon.class.getSimpleName()));
 
     public Epsilon(String name) {
         super(name, abstractCharacterEnum.EPSILON, ORB_TEXTURES, epsilonModHelper.assetPath("img/UI/Card/dollar.png"), LAYER_SPEED, null, null);
@@ -84,9 +88,9 @@ public class Epsilon extends CustomPlayer {
     public ArrayList<String> getStartingDeck() {
         // todo:初始卡组改为 兵营 和 铁卫(每回合结束给予x点格挡)
         ArrayList<String> retVal = new ArrayList<>();
-//        for (int x = 0; x < 4; x++) {
-//            retVal.add(AttackDog.ID);
-//        }
+        for (int x = 0; x < 4; x++) {
+            retVal.add(yuriRecruit.ID);
+        }
 //        for (int x = 0; x < 4; x++) {
 //            retVal.add(FuryDrone.ID);
 //        }
@@ -98,7 +102,7 @@ public class Epsilon extends CustomPlayer {
     // 初始遗物的ID，可以先写个原版遗物凑数
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
-//        retVal.add(SovietRelic.ID);
+        retVal.add(Vajra.ID);
         return retVal;
     }
 
@@ -133,13 +137,13 @@ public class Epsilon extends CustomPlayer {
     // 翻牌事件出现的你的职业牌（一般设为打击）
     @Override
     public AbstractCard getStartCardForEvent() {
-        return new Conscript();
+        return new yuriRecruit();
     }
 
     // 卡牌轨迹颜色
     @Override
     public Color getCardTrailColor() {
-        return SovietColorSet.SovietColor;
+        return epsilonColorSet.epsilonColor;
     }
 
     // 高进阶带来的生命值损失

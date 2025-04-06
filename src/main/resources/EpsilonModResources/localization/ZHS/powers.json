@@ -1,0 +1,199 @@
+{
+  "momod:SovietBarracksPower": {
+    "NAME": "苏联兵营",
+    "DESCRIPTIONS": [
+      "现在你有",
+      "个兵营建筑,在每回合开始将有",
+      "张步兵单位放入你的手牌中"
+    ]
+  },
+  "momod:SovietWarFactoryPower": {
+    "NAME": "苏联重工",
+    "DESCRIPTIONS": [
+      "现在你有",
+      "个重工建筑,在每回合开始将有",
+      "张坦克单位放入你的手牌中"
+    ]
+  },
+  "momod:WallsPower": {
+    "NAME": "围墙",
+    "DESCRIPTIONS": [
+      "现在你有",
+      "层 围墙 ,在每回合结束将获得",
+      "点 格挡 ",
+      "次"
+    ]
+  },
+  "momod:InstantShelterPower": {
+    "NAME": "应急碉堡",
+    "DESCRIPTIONS": [
+      "现在你有",
+      "座 应急碉堡 ,在每回合结束将获得",
+      "点 格挡 ",
+      "次"
+    ]
+  },
+  "momod:SensorTowerPower": {
+    "NAME": "侦测塔",
+    "DESCRIPTIONS": [
+      "现在你有",
+      "层 侦测塔 ,在每回合开始将获得",
+      "点 预见 ,",
+      "张牌"
+    ]
+  },
+  "momod:FlameTowerPower": {
+    "NAME": "烈焰炮台",
+    "DESCRIPTIONS": [
+      "现在你有",
+      "层 烈焰炮台 ,在每回合开始将给予1名随机敌人",
+      "点 点燃值 ,"
+    ]
+  },
+  "momod:TechOilDerrickPower": {
+    "NAME": "科技钻油井",
+    "DESCRIPTIONS": [
+      "现在你有",
+      "层科技钻油井 ,在每回合开始将获得",
+      "点 [E] "
+    ]
+  },
+  "momod:SovietOreRefineryPower": {
+    "NAME": "苏联矿石精炼厂",
+    "DESCRIPTIONS": [
+      "现在你有",
+      "层苏联矿石精炼厂 ,在每回合开始将获得",
+      "点 [E] "
+    ]
+  },
+  "momod:TechnologyLevelPower": {
+    "NAME": "科技等级",
+    "DESCRIPTIONS": [
+      "目前您的科技等级为:"
+    ]
+  },
+  "momod:FireUpPower": {
+    "NAME": "点燃",
+    "DESCRIPTIONS": [
+      "本回合结束将造成",
+      "点伤害,下回合点燃状态增加",
+      "层"
+    ]
+  },
+  "momod:EliteRseservesPower": {
+    "NAME": "精英预备队",
+    "DESCRIPTIONS": [
+      "建筑生产的单位自带升级"
+    ]
+  },
+  "momod:ElectromagneticParalysisPower": {
+    "NAME": "电磁紊乱",
+    "DESCRIPTIONS": [
+      "目标在本回合会被 击晕 "
+    ]
+  },
+  "momod:FuryDronepower": {
+    "NAME": "怒焰地雷机器人",
+    "DESCRIPTIONS": [
+      "当受到攻击时,对攻击者造成 ",
+      " 点伤害 NL 每回合结束时失去所有怒焰地雷机器人"
+    ]
+  },
+  "momod:EMPMinesPower": {
+    "NAME": "EMP地雷",
+    "DESCRIPTIONS": [
+      "当受到攻击时,有 ",
+      " %的概率对攻击者造成 电磁紊乱效果 NL 每回合结束时失去所有EMP地雷"
+    ]
+  },
+  "momod:LargeIterationPlanPower": {
+    "NAME": "大迭代计划",
+    "DESCRIPTIONS": [
+      "当 科技等级 到达4级时,重置 科技等级 并获得 10点 敏捷 力量"
+    ]
+  },
+  "momod:IrradiationGammaPower": {
+    "NAME": "放射性装甲",
+    "DESCRIPTIONS": [
+      "受到X点伤害后,反伤",
+      "%X点伤害"
+    ]
+  },
+  "momod:DebrisShelterPower": {
+    "NAME": "废墟掩体",
+    "DESCRIPTIONS": [
+      "每 消耗 一张建筑牌,获得",
+      "层 格挡 "
+    ]
+  },
+  "momod:TerrorDronePower": {
+    "NAME": "恐怖机器人",
+    "DESCRIPTIONS": [
+      "你的怒焰地雷机器人将不会再回合结束时消失"
+    ]
+  },
+  "momod:IndustrialPlantPower": {
+    "NAME": "工业工厂",
+    "DESCRIPTIONS": [
+      "所有产出的单位 [E] -"
+    ]
+  },
+  "momod:CapacityUpgradingPower": {
+    "NAME": "产能升级",
+    "DESCRIPTIONS": [
+      "苏联重工 和 苏联兵营 每回合生产的部队数+"
+    ]
+  },
+  "momod:GearChangePower": {
+    "NAME": "工厂维护",
+    "DESCRIPTIONS": [
+      "生产建筑将停工 ",
+      "回合 NL 结束后, 获得 产能升级 效果"
+    ]
+  },
+  "momod:EMPControlStationPower": {
+    "NAME": "EMP控制站",
+    "DESCRIPTIONS": [
+      "回合后在手牌中加入一张电磁脉冲"
+    ]
+  },
+  "momod:TacticalNukeSiloPower": {
+    "NAME": "战术核弹发射井",
+    "DESCRIPTIONS": [
+      "回合后在手牌中加入一张 战术核弹攻击"
+    ]
+  },
+  "momod:IronCurtainDevicePower": {
+    "NAME": "铁幕装置",
+    "DESCRIPTIONS": [
+      "回合后在手牌中加入一张 无敌"
+    ]
+  },
+  "momod:OverChargePower": {
+    "NAME": "磁能过载",
+    "DESCRIPTIONS": [
+      "回合内 电磁紊乱 的成功率上升至 100%"
+    ]
+  },
+  "momod:FortressBesiegedPower": {
+    "NAME": "围城",
+    "DESCRIPTIONS": [
+      "在每回合结束获得 ",
+      " 点 格挡",
+      "次"
+    ]
+  },
+  "momod:SovietCloningVatsPower": {
+    "NAME": "克隆缸",
+    "DESCRIPTIONS": [
+      "所有的动员兵会被额外打出",
+      "次"
+    ]
+  },
+  "momod:ConsconscriptPower": {
+    "NAME": "动员动员兵",
+    "DESCRIPTIONS": [
+      "所有的动员兵伤害+"
+    ]
+  }
+}
