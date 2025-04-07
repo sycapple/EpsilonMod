@@ -12,6 +12,7 @@ import basemod.interfaces.PostDeathSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.actions.GameActionManager;
@@ -23,7 +24,6 @@ import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
@@ -32,40 +32,34 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import EpsilonMod.util.MutablePair;
 
-
+@SpireInitializer
 public class allUnitPanel implements PostInitializeSubscriber, OnStartBattleSubscriber, PostBattleSubscriber, PostDeathSubscriber {
     public static final Logger logger = LogManager.getLogger(allUnitPanel.class.getName());
-    static ArrayList<perUnitPanel> drawList;
-    static ArrayList<perUnitPanel> discardList;
+    static ArrayList<perUnitPanel> unitList;
     public static float RELICLINE;
     public static boolean extendedTooltips;
     public static boolean dynamicUpdate;
     public static boolean dynamicText;
     public static boolean frozenEye;
-    public static int drawHeight;
-    public static int discardHeight;
+    public static int unitPanelHeight;
     public static int defaultDrawHeight;
-    public static int defaultDiscardHeight;
     public static int drawWidth;
-    public static int discardWidth;
-    public static float drawTextSize;
-    public static float discardTextSize;
-    public static float defaultDiscardText;
+    public static float unitTextSize;
     public static float defaultDrawText;
     public static float xloc;
-    public static float xlocDiscard;
     public static float yOffset;
-    public static float yOffsetDiscard;
     public static final float screenArea = 650.0F;
     public static float previousxloc;
     public static float previousyOffset;
-    public static float previousxlocDiscard;
-    public static float previousyOffsetDiscard;
 
     public allUnitPanel() {
-        drawList = new ArrayList();
-        discardList = new ArrayList();
+        unitList = new ArrayList();
         BaseMod.subscribe(this);
+    }
+
+    public static void initialize() {
+        new allUnitPanel();
+        new modConfig();
     }
 
     public void receivePostInitialize() {
@@ -78,57 +72,29 @@ public class allUnitPanel implements PostInitializeSubscriber, OnStartBattleSubs
             modConfig.setFloat("draw-x", xloc);
             previousxloc = xloc;
         }
-
         if (yOffset != previousyOffset) {
             modConfig.setFloat("draw-y", yOffset);
             previousyOffset = yOffset;
         }
-
-        if (xlocDiscard != previousxlocDiscard) {
-            modConfig.setFloat("discard-x", xlocDiscard);
-            previousxlocDiscard = xlocDiscard;
-        }
-
-        if (yOffsetDiscard != previousyOffsetDiscard) {
-            modConfig.setFloat("discard-y", yOffsetDiscard);
-            previousyOffsetDiscard = yOffsetDiscard;
-        }
-
     }
 
     public void receivePostBattle(AbstractRoom abstractRoom) {
-        ResetList(true);
-        ResetList(false);
+        ResetList();
     }
 
     public void receivePostDeath() {
-        ResetList(true);
-        ResetList(false);
+        ResetList();
     }
 
-    private static void ResetList(boolean discardDeck) {
+    private static void ResetList() {
         Iterator var1;
         perUnitPanel dt;
-        if (discardDeck) {
-            var1 = discardList.iterator();
-
-            while (var1.hasNext()) {
-                dt = (perUnitPanel) var1.next();
-                dt.Remove();
-            }
-
-            discardList.clear();
-        } else {
-            var1 = drawList.iterator();
-
-            while (var1.hasNext()) {
-                dt = (perUnitPanel) var1.next();
-                dt.Remove();
-            }
-
-            drawList.clear();
+        var1 = unitList.iterator();
+        while (var1.hasNext()) {
+            dt = (perUnitPanel) var1.next();
+            dt.Remove();
         }
-
+        unitList.clear();
     }
 
     public static void Update() {
@@ -138,45 +104,24 @@ public class allUnitPanel implements PostInitializeSubscriber, OnStartBattleSubs
             logger.error("You played a card while not in combat?");
             return;
         }
-
-        makeDeckList(false);
-        makeDeckList(true);
+        makeDeckList();
     }
 
-    private static void makeDeckList(boolean discardDeck) {
-        ResetList(discardDeck);
-        TextureAtlas.AtlasRegion energyOrbAR = AbstractDungeon.player.getOrb();
+    private static void makeDeckList() {
+        ResetList(); //重置卡槽
+        TextureAtlas.AtlasRegion energyOrbAR = AbstractDungeon.player.getOrb(); //获取能量材质
         int screenSpace;
-        if (discardDeck) {
-            screenSpace = (int) (650.0F * Settings.scale - (RELICLINE - yOffsetDiscard));
-        } else {
-            screenSpace = (int) (650.0F * Settings.scale - (RELICLINE - yOffset));
-        }
-
         int currentHeight;
         float currentText;
-        if (discardDeck) {
-            currentHeight = defaultDiscardHeight;
-            currentText = defaultDiscardText;
-        } else {
-            currentHeight = defaultDrawHeight;
-            currentText = defaultDrawText;
-        }
-
         TreeMap ret;
         int cardTypes;
-        if (discardDeck) {
-            ret = GetCards(AbstractDungeon.player.discardPile.group);
-            cardTypes = ret.entrySet().size();
-        } else {
-            cardTypes = AbstractDungeon.player.drawPile.group.size();
-            ret = null;
-            if (!AbstractDungeon.player.hasRelic("Frozen Eye") || !frozenEye) {
-                ret = GetCards(AbstractDungeon.player.drawPile.group);
-                cardTypes = ret.entrySet().size();
-            }
-        }
-
+        //屏幕参数设置
+        screenSpace = (int) (650.0F * Settings.scale - (RELICLINE - yOffset));
+        currentHeight = defaultDrawHeight;
+        currentText = defaultDrawText;
+        ret = null;
+        ret = GetCards(AbstractDungeon.player.drawPile.group); //todo 从卡槽列表拿牌
+        cardTypes = ret.entrySet().size();
         if (dynamicUpdate) {
             while (cardTypes > screenSpace / currentHeight && currentHeight >= 18) {
                 --currentHeight;
@@ -187,79 +132,44 @@ public class allUnitPanel implements PostInitializeSubscriber, OnStartBattleSubs
             currentText = GetTextSize(currentHeight);
         }
 
-        if (discardDeck) {
-            discardHeight = currentHeight;
-            discardTextSize = currentText;
-        } else {
-            drawHeight = currentHeight;
-            drawTextSize = currentText;
-        }
+        unitPanelHeight = currentHeight;
+        unitTextSize = currentText;
+
 
         cardTypes = -1;
         int y = 0;
         TextureRegion TROrb;
-        if (AbstractDungeon.player.hasRelic("Frozen Eye") && !discardDeck && frozenEye) {
-            ArrayList<AbstractCard> deck = (ArrayList) AbstractDungeon.player.drawPile.group.clone();
-            Collections.reverse(deck);
-            Iterator var17 = deck.iterator();
+        Iterator perUnitPanel = ret.entrySet().iterator();
 
-            while (var17.hasNext()) {
-                AbstractCard card = (AbstractCard) var17.next();
-                ++cardTypes;
-                if (cardTypes > screenSpace / currentHeight && cardTypes != 0) {
-                    break;
-                }
-
-                --y;
-                switch (card.color) {
-                    case CURSE:
-                    case COLORLESS:
-                        TROrb = new TextureRegion(ImageMaster.CARD_GRAY_ORB_L, 0, 0, ImageMaster.CARD_GRAY_ORB_L.packedWidth, ImageMaster.CARD_GRAY_ORB_L.packedHeight);
-                        break;
-                    default:
-                        TROrb = new TextureRegion(energyOrbAR, 0, 0, energyOrbAR.packedWidth, energyOrbAR.packedHeight);
-                }
-
-                float yloc = (float) (y * drawHeight) * 1.15F * Settings.scale + yOffset;
-                perUnitPanel dtCard = new perUnitPanel(card, TROrb, xloc, yloc, -1, discardDeck);
-                drawList.add(dtCard);
+        while (perUnitPanel.hasNext()) {
+            Map.Entry<String, MutablePair<AbstractCard, Integer>> entry = (Map.Entry) perUnitPanel.next();
+            ++cardTypes;
+            if (cardTypes > screenSpace / currentHeight && cardTypes != 0) {
+                break;
             }
-        } else {
-            Iterator var9 = ret.entrySet().iterator();
 
-            while (var9.hasNext()) {
-                Map.Entry<String, MutablePair<AbstractCard, Integer>> entry = (Map.Entry) var9.next();
-                ++cardTypes;
-                if (cardTypes > screenSpace / currentHeight && cardTypes != 0) {
+            int amount = (Integer) ((MutablePair) entry.getValue()).getRight();
+            --y;
+            AbstractCard card = (AbstractCard) ((MutablePair) entry.getValue()).getLeft();
+
+            // 设置能量贴图
+            switch (card.color) {
+                case CURSE:
+                case COLORLESS:
+                    TROrb = new TextureRegion(ImageMaster.CARD_GRAY_ORB_L, 0, 0, ImageMaster.CARD_GRAY_ORB_L.packedWidth, ImageMaster.CARD_GRAY_ORB_L.packedHeight);
                     break;
-                }
-
-                int amount = (Integer) ((MutablePair) entry.getValue()).getRight();
-                --y;
-                AbstractCard card = (AbstractCard) ((MutablePair) entry.getValue()).getLeft();
-                switch (card.color) {
-                    case CURSE:
-                    case COLORLESS:
-                        TROrb = new TextureRegion(ImageMaster.CARD_GRAY_ORB_L, 0, 0, ImageMaster.CARD_GRAY_ORB_L.packedWidth, ImageMaster.CARD_GRAY_ORB_L.packedHeight);
-                        break;
-                    default:
-                        TROrb = new TextureRegion(energyOrbAR, 0, 0, energyOrbAR.packedWidth, energyOrbAR.packedHeight);
-                }
-
-                perUnitPanel dtCard;
-                float yloc;
-                if (discardDeck) {
-                    yloc = (float) (y * discardHeight) * 1.15F * Settings.scale + yOffsetDiscard;
-                    float x = (float) Settings.WIDTH - (float) (discardWidth + discardHeight) * Settings.scale - xlocDiscard;
-                    dtCard = new perUnitPanel(card, TROrb, x, yloc, amount, discardDeck);
-                    discardList.add(dtCard);
-                } else {
-                    yloc = (float) (y * drawHeight) * 1.15F * Settings.scale + yOffset;
-                    dtCard = new perUnitPanel(card, TROrb, xloc, yloc, amount, discardDeck);
-                    drawList.add(dtCard);
-                }
+                default:
+                    TROrb = new TextureRegion(energyOrbAR, 0, 0, energyOrbAR.packedWidth, energyOrbAR.packedHeight);
             }
+
+            //添加卡牌面板
+            perUnitPanel dtCard;
+            float yloc;
+            yloc = (float) (y * unitPanelHeight) * 1.15F * Settings.scale + yOffset;
+            dtCard = new perUnitPanel(card, TROrb, xloc, yloc, amount);
+            unitList.add(dtCard);
         }
+
 
     }
 
@@ -280,29 +190,16 @@ public class allUnitPanel implements PostInitializeSubscriber, OnStartBattleSubs
         return ret;
     }
 
-    public static void MoveAll(boolean discard) {
+    public static void MoveAll() {
         int y = 0;
         Iterator var2;
         perUnitPanel dtCard;
-        if (discard) {
-            var2 = discardList.iterator();
-
-            while (var2.hasNext()) {
-                dtCard = (perUnitPanel) var2.next();
-                --y;
-                float x = (float) Settings.WIDTH - (float) (discardWidth + discardHeight) * Settings.scale - xlocDiscard;
-                dtCard.Move(x, (float) (y * discardHeight) * 1.15F * Settings.scale + yOffsetDiscard);
-            }
-        } else {
-            var2 = drawList.iterator();
-
-            while (var2.hasNext()) {
-                dtCard = (perUnitPanel) var2.next();
-                --y;
-                dtCard.Move(xloc, (float) (y * drawHeight) * 1.15F * Settings.scale + yOffset);
-            }
+        var2 = unitList.iterator();
+        while (var2.hasNext()) {
+            dtCard = (perUnitPanel) var2.next();
+            --y;
+            dtCard.Move(xloc, (float) (y * unitPanelHeight) * 1.15F * Settings.scale + yOffset);
         }
-
     }
 
     public static float clamp(float val, float min, float max) {

@@ -43,7 +43,6 @@ public class perUnitPanel implements RenderSubscriber, PreUpdateSubscriber {
     private String name;
     private String description;
     private BitmapFont titleFont;
-    private boolean discardDeck;
     private float textSize;
     private boolean canRender = true;
     private TextureRegion portrait;
@@ -51,10 +50,9 @@ public class perUnitPanel implements RenderSubscriber, PreUpdateSubscriber {
     private float startLocY;
     public static final Logger logger = LogManager.getLogger(allUnitPanel.class.getName());
 
-    public perUnitPanel(AbstractCard card, TextureRegion orbTR, float x, float y, int amount, boolean discard) {
+    public perUnitPanel(AbstractCard card, TextureRegion orbTR, float x, float y, int amount) {
         this.card = card.makeStatEquivalentCopy();
         this.card.drawScale = 0.7F;
-        this.discardDeck = discard;
         this.amount = amount;
         this.orbTexture = orbTR;
         if (card.cost == -1) {
@@ -67,19 +65,14 @@ public class perUnitPanel implements RenderSubscriber, PreUpdateSubscriber {
 
         this.titleFont = FontHelper.cardTitleFont;
         this.extendedTooltips = allUnitPanel.extendedTooltips;
-        if (this.discardDeck) {
-            this.width = (float)allUnitPanel.discardWidth * Settings.scale;
-            this.height = (float)allUnitPanel.discardHeight * Settings.scale;
-            this.textSize = allUnitPanel.discardTextSize;
-        } else {
-            this.width = (float)allUnitPanel.drawWidth * Settings.scale;
-            this.height = (float)allUnitPanel.drawHeight * Settings.scale;
-            this.textSize = allUnitPanel.drawTextSize;
-        }
+        this.width = (float) allUnitPanel.drawWidth * Settings.scale;
+        this.height = (float) allUnitPanel.unitPanelHeight * Settings.scale;
+        this.textSize = allUnitPanel.unitTextSize;
+
 
         this.name = card.name;
-        if (this.name.length() > (int)(this.width / (this.textSize * 10.0F)) / 2) {
-            this.name = this.name.substring(0, (int)(this.width / (this.textSize * 10.0F)) / 2);
+        if (this.name.length() > (int) (this.width / (this.textSize * 10.0F)) / 2) {
+            this.name = this.name.substring(0, (int) (this.width / (this.textSize * 10.0F)) / 2);
             if (card.name.endsWith("+") && !this.name.endsWith("+")) {
                 this.name = this.name + "+";
             }
@@ -116,35 +109,25 @@ public class perUnitPanel implements RenderSubscriber, PreUpdateSubscriber {
         }
 
         if (this.hb.hovered && InputHelper.justClickedLeft) {
-            this.startLocX = (float)InputHelper.mX;
-            this.startLocY = (float)InputHelper.mY;
+            this.startLocX = (float) InputHelper.mX;
+            this.startLocY = (float) InputHelper.mY;
             this.hb.clickStarted = true;
         }
 
         if (this.hb.clickStarted) {
-            float translateX = this.startLocX - (float)InputHelper.mX;
-            float translateY = this.startLocY - (float)InputHelper.mY;
-            this.startLocX = (float)InputHelper.mX;
-            this.startLocY = (float)InputHelper.mY;
+            float translateX = this.startLocX - (float) InputHelper.mX;
+            float translateY = this.startLocY - (float) InputHelper.mY;
+            this.startLocX = (float) InputHelper.mX;
+            this.startLocY = (float) InputHelper.mY;
             float newValueX;
             float newValueY;
-            if (this.discardDeck) {
-                newValueX = allUnitPanel.xlocDiscard + translateX;
-                newValueY = allUnitPanel.yOffsetDiscard - translateY;
-                newValueX = allUnitPanel.clamp(newValueX, 0.0F, (float)Settings.WIDTH - (this.width + this.height * 2.0F) * Settings.scale);
-                newValueY = allUnitPanel.clamp(newValueY, allUnitPanel.RELICLINE - 650.0F * Settings.scale, allUnitPanel.RELICLINE);
-                allUnitPanel.xlocDiscard = newValueX;
-                allUnitPanel.yOffsetDiscard = newValueY;
-            } else {
-                newValueX = this.xloc - translateX;
-                newValueY = allUnitPanel.yOffset - translateY;
-                newValueX = allUnitPanel.clamp(newValueX, 0.0F, (float)Settings.WIDTH - (this.width + this.height * 2.0F) * Settings.scale);
-                newValueY = allUnitPanel.clamp(newValueY, allUnitPanel.RELICLINE - 650.0F * Settings.scale, allUnitPanel.RELICLINE);
-                allUnitPanel.xloc = newValueX;
-                allUnitPanel.yOffset = newValueY;
-            }
-
-            allUnitPanel.MoveAll(this.discardDeck);
+            newValueX = this.xloc - translateX;
+            newValueY = allUnitPanel.yOffset - translateY;
+            newValueX = allUnitPanel.clamp(newValueX, 0.0F, (float) Settings.WIDTH - (this.width + this.height * 2.0F) * Settings.scale);
+            newValueY = allUnitPanel.clamp(newValueY, allUnitPanel.RELICLINE - 650.0F * Settings.scale, allUnitPanel.RELICLINE);
+            allUnitPanel.xloc = newValueX;
+            allUnitPanel.yOffset = newValueY;
+            allUnitPanel.MoveAll();
         }
 
     }
@@ -156,22 +139,11 @@ public class perUnitPanel implements RenderSubscriber, PreUpdateSubscriber {
             BaseMod.unsubscribeLater(this);
             return;
         }
-
         if (this.hb.hovered && !this.hb.clickStarted) {
             float tooltipX;
-            if (this.discardDeck) {
-                tooltipX = this.xloc - (190.0F + this.height + this.width) * Settings.scale;
-            } else {
-                tooltipX = this.xloc + this.width + this.height / 2.0F + 15.0F;
-            }
-
+            tooltipX = this.xloc + this.width + this.height / 2.0F + 15.0F;
             if (this.extendedTooltips) {
-                if (this.discardDeck) {
-                    this.card.current_x = this.xloc - (this.card.drawScale * this.cardSizeWidth / 2.0F + this.height / 2.0F);
-                } else {
-                    this.card.current_x = tooltipX + this.card.drawScale * this.cardSizeWidth / 2.0F;
-                }
-
+                this.card.current_x = tooltipX + this.card.drawScale * this.cardSizeWidth / 2.0F;
                 this.card.current_y = this.yloc - this.card.drawScale * this.cardSizeHeight / 2.0F + this.height;
                 this.card.render(sb);
             } else {
@@ -250,11 +222,11 @@ public class perUnitPanel implements RenderSubscriber, PreUpdateSubscriber {
                         return "[#ff6563]" + Integer.toString(this.card.magicNumber) + "[]";
                     }
                 default:
-                    logger.info("KEY: " + key);
+//                    logger.info("KEY: " + key);
                     return Integer.toString(-99);
             }
         } else {
-            DynamicVariable dv = (DynamicVariable)BaseMod.cardDynamicVariableMap.get(key);
+            DynamicVariable dv = (DynamicVariable) BaseMod.cardDynamicVariableMap.get(key);
             if (dv != null) {
                 if (dv.isModified(this.card)) {
                     if (dv.value(this.card) >= dv.baseValue(this.card)) {
@@ -267,58 +239,34 @@ public class perUnitPanel implements RenderSubscriber, PreUpdateSubscriber {
                 }
             }
 
-            logger.info(key + " is " + value);
+//            logger.info(key + " is " + value);
             return value;
         }
     }
 
     public void UpdateDescription() {
         this.description = "";
-        boolean firstWord = true;
         this.card.initializeDescription();
-        String descriptionFragment = "";
 
-        for(int i = 0; i < this.card.description.size(); ++i) {
-            descriptionFragment = ((DescriptionLine)this.card.description.get(i)).getText();
-            String[] var4 = descriptionFragment.split(" ");
-            int var5 = var4.length;
-
-            for(int var6 = 0; var6 < var5; ++var6) {
-                String word = var4[var6];
-                if (firstWord) {
-                    firstWord = false;
+        for (int i = 0; i < this.card.description.size(); ++i) {
+            String descriptionFragment = ((DescriptionLine) this.card.description.get(i)).getText();
+//            logger.info("descriptionFragment is " + descriptionFragment);
+            descriptionFragment = descriptionFragment.replace('!', ' ');
+            String[] words = descriptionFragment.split(" ");
+            for (String word : words) {
+//                logger.info("word is " + word);
+                if (word.length() == 1 && word.charAt(0) >= 'A' && word.charAt(0) <= 'Z') {
+                    // 替换为动态值
+                    this.description += this.getDynamicValue(word);
                 } else {
-                    this.description = this.description + " ";
+                    // 直接添加单词
+                    this.description += word;
                 }
-
-                String key;
-                if (word.length() > 0 && word.charAt(0) == '*') {
-                    word = word.substring(1);
-                    key = "";
-                    if (word.length() > 1 && !Character.isLetter(word.charAt(word.length() - 2))) {
-                        key = key + word.charAt(word.length() - 2);
-                        word = word.substring(0, word.length() - 2);
-                        key = key + ' ';
-                    }
-
-                    this.description = this.description + word;
-                    this.description = this.description + key;
-                } else if (word.length() > 0 && word.charAt(0) == '!') {
-                    key = "";
-
-                    for(int j = 1; j < word.length(); ++j) {
-                        if (word.charAt(j) == '!') {
-                            this.description = this.description + this.getDynamicValue(key);
-                            this.description = this.description + word.substring(j + 1);
-                        } else {
-                            key = key + word.charAt(j);
-                        }
-                    }
-                } else {
-                    this.description = this.description + word;
+                // 添加空格分隔单词（最后一个单词除外）
+                if (i < words.length - 1) {
+                    this.description += " ";
                 }
             }
         }
-
     }
 }
