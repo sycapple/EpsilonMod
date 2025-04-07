@@ -1,5 +1,5 @@
 {
-  "momod:AddCardToConstructionPileAction": {
+  "momod:AddCardToUnitPileAction": {
     "TEXT": [
       "我的建筑槽位已满！"
     ]

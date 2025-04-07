@@ -1,6 +1,14 @@
 {
-  "EpsilonMod:yuriRecruit": {
-    "NAME": "尤里新兵",
+  "EpsilonMod:initiate": {
+    "NAME": "新兵",
     "DESCRIPTION": "造成 !D! 点伤害。"
+  },
+  "EpsilonMod:epsilonWalls": {
+    "NAME": "护城墙",
+    "DESCRIPTION": "获得 !B! 点格挡。"
+  },
+  "EpsilonMod:spookSquad": {
+    "NAME": "精怪小队",
+    "DESCRIPTION": "向兵槽中加入 !M! 只精怪"
   }
 }

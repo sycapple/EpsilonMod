@@ -10,8 +10,8 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class yuriRecruit extends abstractEpsilonCard {
-    public static final String ID = epsilonModHelper.makeID(yuriRecruit.class.getSimpleName());
+public class initiate extends abstractEpsilonCard {
+    public static final String ID = epsilonModHelper.makeID(initiate.class.getSimpleName());
     private static final CardStrings CARD_STRINGS = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final int COST = 1;
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.ATTACK;
@@ -19,9 +19,9 @@ public class yuriRecruit extends abstractEpsilonCard {
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.ENEMY;
     private static final AbstractCard.CardColor COLOR = abstractCardEnum.EPSILON;
 
-    public yuriRecruit() {
+    public initiate() {
         // 为了命名规范修改了变量名。这些参数具体的作用见下方
-        super(ID, false, CARD_STRINGS, COST, TYPE, COLOR, RARITY, TARGET);
+        super(ID, true, CARD_STRINGS, COST, TYPE, COLOR, RARITY, TARGET);
         this.setupDamage(6);
         this.tags.add(AbstractCard.CardTags.STARTER_STRIKE);
         this.tags.add(AbstractCard.CardTags.STRIKE);
@@ -29,7 +29,6 @@ public class yuriRecruit extends abstractEpsilonCard {
 
     @Override
     public void limitedUpgrade() {
-        super.limitedUpgrade();
         this.upgradeDamage(3);
     }
 

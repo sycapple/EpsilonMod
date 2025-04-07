@@ -1,11 +1,11 @@
 package EpsilonMod.modCore;
 
 
-import EpsilonMod.cards.attack.yuriRecruit;
+import EpsilonMod.cards.attack.*;
+import EpsilonMod.cards.skill.*;
 import basemod.BaseMod;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.utils.compression.lzma.Base;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -16,13 +16,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import EpsilonMod.util.epsilonModHelper;
 import EpsilonMod.enums.abstractCharacterEnum;
-import EpsilonMod.enums.libraryTypeEnum;
 import EpsilonMod.rewards.epsilonCardReward;
 import EpsilonMod.enums.abstractEpsilonRewardsEnum;
 import EpsilonMod.colorSet.epsilonColorSet;
 import EpsilonMod.enums.abstractCardEnum;
 import EpsilonMod.characters.Epsilon;
-
+import EpsilonMod.panels.allUnitPanel;
+import EpsilonMod.panels.modConfig;
 import java.nio.charset.StandardCharsets;
 
 @SpireInitializer
@@ -59,6 +59,8 @@ public class epsilonMod implements EditCardsSubscriber, EditCharactersSubscriber
 
         logger.info("========================= 开始初始化 =========================");
         new epsilonMod();
+        new allUnitPanel();
+        new modConfig();
         logger.info("========================= 初始化完成 =========================");
     }
 
@@ -77,7 +79,9 @@ public class epsilonMod implements EditCardsSubscriber, EditCharactersSubscriber
     public void receiveEditCards() {
         // TODO 这里写添加你卡牌的代码
         logger.info("========================= 开始加载卡牌 =========================");
-        BaseMod.addCard(new yuriRecruit());
+        BaseMod.addCard(new initiate());
+        BaseMod.addCard(new epsilonWalls());
+        BaseMod.addCard(new spookSquad());
         logger.info("========================= 卡牌加载完毕 =========================");
     }
 

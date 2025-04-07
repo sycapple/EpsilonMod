@@ -1,11 +1,12 @@
 package EpsilonMod.characters;
 
-import EpsilonMod.cards.attack.yuriRecruit;
+
 import EpsilonMod.enums.abstractCharacterEnum;
 import EpsilonMod.colorSet.epsilonColorSet;
 import EpsilonMod.util.epsilonModHelper;
 import EpsilonMod.enums.abstractCardEnum;
-import EpsilonMod.colorSet.epsilonColorSet;
+import EpsilonMod.cards.attack.*;
+import EpsilonMod.cards.skill.*;
 
 import basemod.abstracts.CustomPlayer;
 import com.badlogic.gdx.graphics.Color;
@@ -21,6 +22,7 @@ import com.megacrit.cardcrawl.events.city.Vampires;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
+import com.megacrit.cardcrawl.relics.BurningBlood;
 import com.megacrit.cardcrawl.relics.Vajra;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 
@@ -89,20 +91,19 @@ public class Epsilon extends CustomPlayer {
         // todo:初始卡组改为 兵营 和 铁卫(每回合结束给予x点格挡)
         ArrayList<String> retVal = new ArrayList<>();
         for (int x = 0; x < 4; x++) {
-            retVal.add(yuriRecruit.ID);
+            retVal.add(initiate.ID);
         }
-//        for (int x = 0; x < 4; x++) {
-//            retVal.add(FuryDrone.ID);
-//        }
-//        retVal.add(Build0SovietBarracks.ID);
-//        retVal.add(Build0Walls.ID);
+        for (int x = 0; x < 4; x++) {
+            retVal.add(epsilonWalls.ID);
+        }
+        retVal.add(spookSquad.ID);
         return retVal;
     }
 
     // 初始遗物的ID，可以先写个原版遗物凑数
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
-        retVal.add(Vajra.ID);
+        retVal.add(BurningBlood.ID);
         return retVal;
     }
 
@@ -137,7 +138,7 @@ public class Epsilon extends CustomPlayer {
     // 翻牌事件出现的你的职业牌（一般设为打击）
     @Override
     public AbstractCard getStartCardForEvent() {
-        return new yuriRecruit();
+        return new initiate();
     }
 
     // 卡牌轨迹颜色
@@ -161,6 +162,7 @@ public class Epsilon extends CustomPlayer {
     // 人物选择界面点击你的人物按钮时触发的方法，这里为屏幕轻微震动
     @Override
     public void doCharSelectScreenSelectEffect() {
+        //todo 选择音效
         CardCrawlGame.sound.playA("SOVIET_SELECT", MathUtils.random(0, 0));
         CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.MED, ScreenShake.ShakeDur.SHORT, false);
     }
