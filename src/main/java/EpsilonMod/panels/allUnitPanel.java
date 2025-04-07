@@ -22,6 +22,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import EpsilonMod.util.unitPileManager;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -120,7 +121,7 @@ public class allUnitPanel implements PostInitializeSubscriber, OnStartBattleSubs
         currentHeight = defaultDrawHeight;
         currentText = defaultDrawText;
         ret = null;
-        ret = GetCards(AbstractDungeon.player.drawPile.group); //todo 从卡槽列表拿牌
+        ret = GetCards(unitPileManager.getUnitPile().group); //todo 从卡槽列表拿牌
         cardTypes = ret.entrySet().size();
         if (dynamicUpdate) {
             while (cardTypes > screenSpace / currentHeight && currentHeight >= 18) {
