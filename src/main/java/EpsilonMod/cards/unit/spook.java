@@ -1,4 +1,4 @@
-package EpsilonMod.cards.skill;
+package EpsilonMod.cards.unit;
 
 
 import EpsilonMod.cards.abstracts.abstractEpsilonCard;
@@ -10,30 +10,31 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class epsilonWalls extends abstractEpsilonCard {
-    public static final String ID = epsilonModHelper.makeID(epsilonWalls.class.getSimpleName());
+public class spook extends abstractEpsilonCard {
+    public static final String ID = epsilonModHelper.makeID(spook.class.getSimpleName());
     private static final CardStrings CARD_STRINGS = CardCrawlGame.languagePack.getCardStrings(ID);
-    private static final int COST = 1;
+    private static final int COST = 0;
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.SKILL;
     private static final AbstractCard.CardRarity RARITY = CardRarity.BASIC;
-    private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.SELF;
+    public static final AbstractCard.CardTarget TARGET = CardTarget.ALL_ENEMY;
     private static final AbstractCard.CardColor COLOR = abstractCardEnum.EPSILON;
 
-    public epsilonWalls() {
+    public spook() {
         // 为了命名规范修改了变量名。这些参数具体的作用见下方
         super(ID, true, CARD_STRINGS, COST, TYPE, COLOR, RARITY, TARGET);
-        this.tags.add(CardTags.STARTER_DEFEND);
-        this.setupBlock(5);
+        this.setupDamage(3);
+        this.setupMagicNumber(1);
     }
 
 
     @Override
     public void limitedUpgrade() {
-        this.upgradeBlock(3);
+        this.upgradeDamage(2);
+        this.upgradeMagicNumber(1);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        this.gainBlock();
+        this.damageToRandomEnemies(null);
     }
 }

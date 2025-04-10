@@ -39,7 +39,7 @@ public class perUnitPanel implements RenderSubscriber, PreUpdateSubscriber {
     private float height;
     private float xloc;
     private TextureRegion orbTexture;
-    private String cost;
+    private String live;
     private String name;
     private String description;
     private BitmapFont titleFont;
@@ -55,13 +55,8 @@ public class perUnitPanel implements RenderSubscriber, PreUpdateSubscriber {
         this.card.drawScale = 0.7F;
         this.amount = amount;
         this.orbTexture = orbTR;
-        if (card.cost == -1) {
-            this.cost = "X";
-        } else if (card.cost < 0) {
-            this.cost = "-";
-        } else {
-            this.cost = Integer.toString(card.cost);
-        }
+        this.live = Integer.toString(card.magicNumber);
+
 
         this.titleFont = FontHelper.cardTitleFont;
         this.extendedTooltips = allUnitPanel.extendedTooltips;
@@ -174,9 +169,9 @@ public class perUnitPanel implements RenderSubscriber, PreUpdateSubscriber {
         FontHelper.renderFont(sb, this.titleFont, this.name, this.xloc + 30.0F * this.textSize, this.yloc + this.height * 0.8F, nameColor);
         this.titleFont.getData().setScale(this.textSize + 0.1F);
         if (this.card.cost == 1) {
-            FontHelper.renderFont(sb, this.titleFont, this.cost, this.xloc + this.width + this.height * 0.35F, this.yloc + this.height * 0.8F, Color.WHITE);
+            FontHelper.renderFont(sb, this.titleFont, this.live, this.xloc + this.width + this.height * 0.35F, this.yloc + this.height * 0.8F, Color.WHITE);
         } else {
-            FontHelper.renderFont(sb, this.titleFont, this.cost, this.xloc + this.width + this.height * 0.35F - 2.0F, this.yloc + this.height * 0.8F, Color.WHITE);
+            FontHelper.renderFont(sb, this.titleFont, this.live, this.xloc + this.width + this.height * 0.35F - 2.0F, this.yloc + this.height * 0.8F, Color.WHITE);
         }
 
     }

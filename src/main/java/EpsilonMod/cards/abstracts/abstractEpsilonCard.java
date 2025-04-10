@@ -12,8 +12,6 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-import java.util.ArrayList;
-
 
 public abstract class abstractEpsilonCard extends CustomCard {
     public int baseSelfDamage;
@@ -22,15 +20,16 @@ public abstract class abstractEpsilonCard extends CustomCard {
     public int selfBlock;
     private boolean isSelfDamageModified;
     private boolean isSelfBlockModified;
-    public boolean isSecondaryMModified;
+    private boolean isSecondaryMModified;
     public boolean upgradesecondaryM;
     public int secondaryM;
+    public AbstractGameAction.AttackEffect effect;
 
     public abstractEpsilonCard(String ID, boolean useTmpArt, CardStrings strings, int COST, AbstractCard.CardType TYPE, AbstractCard.CardColor color, AbstractCard.CardRarity RARITY, AbstractCard.CardTarget TARGET) {
         super(ID, strings.NAME, useTmpArt ? getTmpImgPath(TYPE) : getImgPath(TYPE, ID), COST, strings.DESCRIPTION, TYPE, color, RARITY, TARGET);
+        effect = AbstractGameAction.AttackEffect.BLUNT_LIGHT;
     }
 
-    //todo:注意使用BASIC来区分不会被抽到的牌
     private static String getTmpImgPath(AbstractCard.CardType t) {
         String type;
         switch (t) {
@@ -105,16 +104,22 @@ public abstract class abstractEpsilonCard extends CustomCard {
 
     // 单体伤害
     public void damageToEnemy(AbstractMonster m, AbstractGameAction.AttackEffect effect) {
-        this.addToBot(new DamageAction(m, new DamageInfo(AbstractDungeon.player, this.damage), effect));
+        if (effect != null)
+            this.effect = effect;
+        this.addToBot(new DamageAction(m, new DamageInfo(AbstractDungeon.player, this.damage), this.effect));
     }
 
     // 群体伤害
     public void damageToAllEnemies(AbstractGameAction.AttackEffect effect) {
-        this.addToBot(new DamageAllEnemiesAction(AbstractDungeon.player, this.multiDamage, this.damageTypeForTurn, effect));
+        if (effect != null)
+            this.effect = effect;
+        this.addToBot(new DamageAllEnemiesAction(AbstractDungeon.player, this.multiDamage, this.damageTypeForTurn, this.effect));
     }
 
     public void damageToRandomEnemies(AbstractGameAction.AttackEffect effect) {
-        this.addToBot(new AttackDamageRandomEnemyAction(this, effect));
+        if (effect != null)
+            this.effect = effect;
+        this.addToBot(new AttackDamageRandomEnemyAction(this, this.effect));
     }
 
     // 获得牌的定义格挡点数
@@ -150,97 +155,11 @@ public abstract class abstractEpsilonCard extends CustomCard {
     }
 
 
-//    public boolean checkStrategyBiggerThanWhenUse(int a) {
-//        return TxwzModHelper.getStrategy() >= a;
-//    }
-
-
     protected void upgradeSecondaryM(int amount) {
         this.secondaryM += amount;
         this.upgradesecondaryM = true;
     }
 
-
-    //    public ArrayList<AbstractCard> getNearCard(AbstractCard c) {
-//        ArrayList<AbstractCard> cl = new ArrayList();
-//        if (AbstractDungeon.getCurrRoom().phase == RoomPhase.COMBAT) {
-//            AbstractCard leftCard = null;
-//            if (AbstractDungeon.player.hasRelic(HangHaiLuoPan.ID)) {
-//                leftCard = AbstractDungeon.player.hand.group.isEmpty() ? null : (AbstractCard) AbstractDungeon.player.hand.group.get(0);
-//            }
-//
-//            if (TxwzModHelper.getIsChained(c) || leftCard != null && leftCard == c) {
-//                ArrayList<AbstractCard> resCList = new ArrayList();
-//                Iterator var9 = AbstractDungeon.player.hand.group.iterator();
-//
-//                while (var9.hasNext()) {
-//                    AbstractCard c2 = (AbstractCard) var9.next();
-//                    if (!c2.uuid.equals(c.uuid)) {
-//                        resCList.add(c2);
-//                    }
-//                }
-//
-//                return resCList;
-//            }
-//
-//            int index = AbstractDungeon.player.hand.group.indexOf(c);
-//            int near = 1;
-//            if (AbstractDungeon.player.hasPower(CiNengZhenFaPower.POWER_ID)) {
-//                near += AbstractDungeon.player.getPower(CiNengZhenFaPower.POWER_ID).amount;
-//            }
-//
-//            for (int i = 0; i < AbstractDungeon.player.hand.group.size(); ++i) {
-//                AbstractCard c2 = (AbstractCard) AbstractDungeon.player.hand.group.get(i);
-//                if (TxwzModHelper.getIsChained(c2) && c2 != c && !cl.contains(c2)) {
-//                    cl.add(c2);
-//                } else if (index != -1 && i != index && i >= index - near && i <= index + near && c2 != c && !cl.contains(c2)) {
-//                    cl.add(c2);
-//                }
-//            }
-//
-//            if (leftCard != null && !cl.contains(leftCard) && leftCard != c) {
-//                cl.add(leftCard);
-//            }
-//        }
-//
-//        return cl;
-//    }
-    // 获取虚弱的敌人
-//    public static int getWeekEnemy() {
-//        int targetI = -1;
-//        ArrayList<Integer> maxHpMonsterIndexList = new ArrayList();
-//        int temp = AbstractDungeon.getCurrRoom().monsters.monsters.size();
-//        ArrayList<AbstractMonster> MaxHpMonster = new ArrayList();
-//
-//        for (int i = 0; i < temp; ++i) {
-//            AbstractMonster m3 = (AbstractMonster) AbstractDungeon.getCurrRoom().monsters.monsters.get(i);
-//            if (!m3.isDeadOrEscaped() && m3.currentHealth > 0) {
-//                if (MaxHpMonster.size() == 0) {
-//                    MaxHpMonster.add(m3);
-//                    maxHpMonsterIndexList.add(i);
-//                } else {
-//                    AbstractMonster chosenM = (AbstractMonster) MaxHpMonster.get(0);
-//                    if (m3.currentHealth < chosenM.currentHealth) {
-//                        maxHpMonsterIndexList.clear();
-//                        maxHpMonsterIndexList.add(i);
-//                        MaxHpMonster.clear();
-//                        MaxHpMonster.add(m3);
-//                    } else if (m3.currentHealth == chosenM.currentHealth) {
-//                        maxHpMonsterIndexList.add(i);
-//                        MaxHpMonster.add(m3);
-//                    }
-//                }
-//            }
-//        }
-//
-//        if (maxHpMonsterIndexList.size() > 1) {
-//            targetI = (Integer) maxHpMonsterIndexList.get(AbstractDungeon.cardRandomRng.random(0, maxHpMonsterIndexList.size() - 1));
-//        } else if (maxHpMonsterIndexList.size() == 1) {
-//            targetI = (Integer) maxHpMonsterIndexList.get(0);
-//        }
-//
-//        return targetI;
-//    }
 
     public void triggerOnEndOfPlayerTurn() {
         this.addToTop(new ExhaustAllEtherealAction());

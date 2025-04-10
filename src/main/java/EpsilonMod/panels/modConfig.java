@@ -5,21 +5,17 @@
 
 package EpsilonMod.panels;
 
-import basemod.BaseMod;
-import basemod.ModButton;
-import basemod.ModLabel;
-import basemod.ModLabeledToggleButton;
-import basemod.ModPanel;
-import basemod.ModSlider;
+import EpsilonMod.util.epsilonModHelper;
+import basemod.*;
 import basemod.interfaces.PostInitializeSubscriber;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
+
 import java.io.IOException;
 import java.util.Properties;
-import EpsilonMod.util.epsilonModHelper;
 public class modConfig implements PostInitializeSubscriber {
     private ModLabeledToggleButton tooltipButton;
     private ModLabeledToggleButton dynamicButton;

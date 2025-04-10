@@ -2,8 +2,9 @@ package EpsilonMod.cards.skill;
 
 
 import EpsilonMod.actions.addUnitToPileAction;
-import EpsilonMod.enums.abstractCardEnum;
 import EpsilonMod.cards.abstracts.abstractEpsilonCard;
+import EpsilonMod.cards.unit.spook;
+import EpsilonMod.enums.abstractCardEnum;
 import EpsilonMod.util.epsilonModHelper;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -34,6 +35,6 @@ public class spookSquad extends abstractEpsilonCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        this.addToBot(new addUnitToPileAction(this));
+        this.addToBot(new addUnitToPileAction(new spook(), this.magicNumber));
     }
 }

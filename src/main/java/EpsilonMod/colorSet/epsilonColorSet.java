@@ -1,7 +1,7 @@
 package EpsilonMod.colorSet;
 
-import com.badlogic.gdx.graphics.Color;
 import EpsilonMod.util.epsilonModHelper;
+import com.badlogic.gdx.graphics.Color;
 
 public class epsilonColorSet {
     public static Color epsilonColor = new Color((float) 122 / 255, (float) 81 / 255, (float) 168 / 255, 1f);

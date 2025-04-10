@@ -1,7 +1,7 @@
 package EpsilonMod.cards.attack;
 
-import EpsilonMod.enums.abstractCardEnum;
 import EpsilonMod.cards.abstracts.abstractEpsilonCard;
+import EpsilonMod.enums.abstractCardEnum;
 import EpsilonMod.util.epsilonModHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;

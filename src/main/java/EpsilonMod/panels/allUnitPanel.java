@@ -5,6 +5,8 @@
 
 package EpsilonMod.panels;
 
+import EpsilonMod.util.MutablePair;
+import EpsilonMod.util.unitPileManager;
 import basemod.BaseMod;
 import basemod.interfaces.OnStartBattleSubscriber;
 import basemod.interfaces.PostBattleSubscriber;
@@ -22,16 +24,13 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
-import EpsilonMod.util.unitPileManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import EpsilonMod.util.MutablePair;
 
 @SpireInitializer
 public class allUnitPanel implements PostInitializeSubscriber, OnStartBattleSubscriber, PostBattleSubscriber, PostDeathSubscriber {
@@ -121,7 +120,7 @@ public class allUnitPanel implements PostInitializeSubscriber, OnStartBattleSubs
         currentHeight = defaultDrawHeight;
         currentText = defaultDrawText;
         ret = null;
-        ret = GetCards(unitPileManager.getUnitPile().group); //todo 从卡槽列表拿牌
+        ret = GetCards(unitPileManager.getUnitPile().group);
         cardTypes = ret.entrySet().size();
         if (dynamicUpdate) {
             while (cardTypes > screenSpace / currentHeight && currentHeight >= 18) {

@@ -10,5 +10,9 @@
   "EpsilonMod:spookSquad": {
     "NAME": "精怪小队",
     "DESCRIPTION": "向兵槽中加入 !M! 只精怪"
+  },
+  "EpsilonMod:spook": {
+    "NAME": "精怪",
+    "DESCRIPTION": "对随机敌人造成 !D! 点伤害，可使用 !M! 次。"
   }
 }

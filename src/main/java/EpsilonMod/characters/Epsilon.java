@@ -1,13 +1,14 @@
 package EpsilonMod.characters;
 
 
-import EpsilonMod.enums.abstractCharacterEnum;
+import EpsilonMod.cards.attack.initiate;
+import EpsilonMod.cards.skill.epsilonWalls;
+import EpsilonMod.cards.skill.spookSquad;
 import EpsilonMod.colorSet.epsilonColorSet;
-import EpsilonMod.util.epsilonModHelper;
 import EpsilonMod.enums.abstractCardEnum;
-import EpsilonMod.cards.attack.*;
-import EpsilonMod.cards.skill.*;
-
+import EpsilonMod.enums.abstractCharacterEnum;
+import EpsilonMod.relic.epsilonEmblem;
+import EpsilonMod.util.epsilonModHelper;
 import basemod.abstracts.CustomPlayer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -23,7 +24,6 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.relics.BurningBlood;
-import com.megacrit.cardcrawl.relics.Vajra;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 
 import java.util.ArrayList;
@@ -86,9 +86,8 @@ public class Epsilon extends CustomPlayer {
 
     }
 
-    // todo:初始卡组的ID，可直接写或引用变量
+
     public ArrayList<String> getStartingDeck() {
-        // todo:初始卡组改为 兵营 和 铁卫(每回合结束给予x点格挡)
         ArrayList<String> retVal = new ArrayList<>();
         for (int x = 0; x < 4; x++) {
             retVal.add(initiate.ID);
@@ -103,7 +102,7 @@ public class Epsilon extends CustomPlayer {
     // 初始遗物的ID，可以先写个原版遗物凑数
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
-        retVal.add(BurningBlood.ID);
+        retVal.add(epsilonEmblem.ID);
         return retVal;
     }
 

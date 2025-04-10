@@ -1,8 +1,20 @@
 package EpsilonMod.modCore;
 
 
-import EpsilonMod.cards.attack.*;
-import EpsilonMod.cards.skill.*;
+import EpsilonMod.cards.attack.initiate;
+import EpsilonMod.cards.skill.epsilonWalls;
+import EpsilonMod.cards.skill.spookSquad;
+import EpsilonMod.cards.unit.spook;
+import EpsilonMod.characters.Epsilon;
+import EpsilonMod.colorSet.epsilonColorSet;
+import EpsilonMod.enums.abstractCardEnum;
+import EpsilonMod.enums.abstractCharacterEnum;
+import EpsilonMod.enums.abstractEpsilonRewardsEnum;
+import EpsilonMod.panels.allUnitPanel;
+import EpsilonMod.panels.modConfig;
+import EpsilonMod.relic.epsilonEmblem;
+import EpsilonMod.rewards.epsilonCardReward;
+import EpsilonMod.util.epsilonModHelper;
 import basemod.BaseMod;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
@@ -14,20 +26,12 @@ import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.rewards.RewardSave;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import EpsilonMod.util.epsilonModHelper;
-import EpsilonMod.enums.abstractCharacterEnum;
-import EpsilonMod.rewards.epsilonCardReward;
-import EpsilonMod.enums.abstractEpsilonRewardsEnum;
-import EpsilonMod.colorSet.epsilonColorSet;
-import EpsilonMod.enums.abstractCardEnum;
-import EpsilonMod.characters.Epsilon;
-import EpsilonMod.panels.allUnitPanel;
-import EpsilonMod.panels.modConfig;
+
 import java.nio.charset.StandardCharsets;
 
 @SpireInitializer
 public class epsilonMod implements EditCardsSubscriber, EditCharactersSubscriber, EditStringsSubscriber, EditRelicsSubscriber, AddAudioSubscriber, StartGameSubscriber, PostInitializeSubscriber, EditKeywordsSubscriber { // 实现接口
-    public static final Logger logger = LogManager.getLogger(epsilonColorSet.class.getSimpleName());
+    public static final Logger logger = LogManager.getLogger(epsilonMod.class.getSimpleName());
 
 
     public epsilonMod() {
@@ -82,11 +86,13 @@ public class epsilonMod implements EditCardsSubscriber, EditCharactersSubscriber
         BaseMod.addCard(new initiate());
         BaseMod.addCard(new epsilonWalls());
         BaseMod.addCard(new spookSquad());
+        BaseMod.addCard(new spook());
         logger.info("========================= 卡牌加载完毕 =========================");
     }
 
     public void receiveEditRelics() {
         logger.info("========================= 开始加载遗物 =========================");
+        BaseMod.addRelicToCustomPool(new epsilonEmblem(), abstractCardEnum.EPSILON);
         logger.info("========================= 遗物加载完毕 =========================");
     }
 
