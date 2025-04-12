@@ -32,8 +32,6 @@ public class synthesisVaultPower extends abstractEpsilonPower {
     @Override
     public void stackPower(int stackAmount) {
         super.stackPower(stackAmount);
-        if (this.amount >= 40)
-            this.amount = 40;
         unitPileManager.setMaxUnit(this.amount + unitPileManager.getInitialMaxUnit());
     }
 
