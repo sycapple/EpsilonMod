@@ -20,7 +20,7 @@ public class checkUnitIfZeroAction extends AbstractGameAction {
                 waitingToRemove.add(unit);
         }
         for (AbstractCard unit : waitingToRemove) {
-            gp.moveToExhaustPile(unit);
+            gp.removeCard(unit);
         }
         this.isDone = true;
     }

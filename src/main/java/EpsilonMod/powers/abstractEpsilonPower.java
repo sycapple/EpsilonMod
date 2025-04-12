@@ -1,6 +1,7 @@
 package EpsilonMod.powers;
 
 import EpsilonMod.util.epsilonModHelper;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -14,6 +15,8 @@ import java.util.UUID;
 public abstract class abstractEpsilonPower extends AbstractPower {
     public boolean upgraded = false;
     public UUID Cuuid;
+    protected Color redColor = new Color(1.0F, 0.0F, 0.0F, 1.0F);
+    protected Color greenColor = new Color(0.0F, 1.0F, 0.0F, 1.0F);
 
 
     public abstractEpsilonPower(PowerStrings powerStrings, String POWER_ID, boolean ifTmpArt, AbstractCreature owner, int amount) {

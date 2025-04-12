@@ -1,6 +1,6 @@
 package EpsilonMod.actions;
 
-import EpsilonMod.modCore.epsilonMod;
+import EpsilonMod.cards.abstracts.abstractEpsilonUnit;
 import EpsilonMod.util.unitPileManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -22,17 +22,7 @@ public class allUnitAttackAction extends AbstractGameAction {
     public void update() {
         for (AbstractCard unit : unitPileManager.getUnitPile().group) {
             logger.info("now " + unit.name + " attack, " + unit.magicNumber + " times remain");
-            switch (unit.target) {
-                case ALL_ENEMY:
-                    unit.use(AbstractDungeon.player, null);
-                    break;
-                case SELF:
-                    unit.use(AbstractDungeon.player, null);
-                    break;
-                case ENEMY:
-                    unit.use(AbstractDungeon.player, null);
-            }
-            unit.magicNumber--;
+            ((abstractEpsilonUnit) unit).attack();
             logger.info(unit.name + " attack over, " + unit.magicNumber + " times remain");
         }
         this.addToBot(new checkUnitIfZeroAction());

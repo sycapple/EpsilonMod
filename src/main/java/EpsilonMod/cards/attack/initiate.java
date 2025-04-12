@@ -21,7 +21,7 @@ public class initiate extends abstractEpsilonCard {
 
     public initiate() {
         // 为了命名规范修改了变量名。这些参数具体的作用见下方
-        super(ID, true, CARD_STRINGS, COST, TYPE, COLOR, RARITY, TARGET);
+        super(ID, true, CARD_STRINGS, COST, TYPE, RARITY, TARGET);
         this.setupDamage(6);
         this.tags.add(AbstractCard.CardTags.STARTER_STRIKE);
         this.tags.add(AbstractCard.CardTags.STRIKE);

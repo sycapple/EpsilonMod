@@ -7,8 +7,8 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 
 public class playerHasUnitPilePatch {
     public static CardGroup.CardGroupType UNIT_PILE;
-    public static Integer maxUnitAvailable = 8;
-    public static Integer maxUnitInitial = 4;
+    public static Integer maxUnitAvailable = 15;
+    public static Integer maxUnitInitial = 10;
 
     public playerHasUnitPilePatch() {
     }

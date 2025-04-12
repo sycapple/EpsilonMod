@@ -1,5 +1,6 @@
 package EpsilonMod.cards.abstracts;
 
+import EpsilonMod.enums.abstractCardEnum;
 import EpsilonMod.util.epsilonModHelper;
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -11,22 +12,15 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-
+import EpsilonMod.colorSet.epsilonColorSet;
 
 public abstract class abstractEpsilonCard extends CustomCard {
-    public int baseSelfDamage;
-    private int baseSelfBlock;
-    public int selfDamage;
-    public int selfBlock;
-    private boolean isSelfDamageModified;
-    private boolean isSelfBlockModified;
-    private boolean isSecondaryMModified;
     public boolean upgradesecondaryM;
     public int secondaryM;
     public AbstractGameAction.AttackEffect effect;
 
-    public abstractEpsilonCard(String ID, boolean useTmpArt, CardStrings strings, int COST, AbstractCard.CardType TYPE, AbstractCard.CardColor color, AbstractCard.CardRarity RARITY, AbstractCard.CardTarget TARGET) {
-        super(ID, strings.NAME, useTmpArt ? getTmpImgPath(TYPE) : getImgPath(TYPE, ID), COST, strings.DESCRIPTION, TYPE, color, RARITY, TARGET);
+    public abstractEpsilonCard(String ID, boolean useTmpArt, CardStrings strings, int COST, AbstractCard.CardType TYPE, AbstractCard.CardRarity RARITY, AbstractCard.CardTarget TARGET) {
+        super(ID, strings.NAME, useTmpArt ? getTmpImgPath(TYPE) : getImgPath(TYPE, ID), COST, strings.DESCRIPTION, TYPE, abstractCardEnum.EPSILON, RARITY, TARGET);
         effect = AbstractGameAction.AttackEffect.BLUNT_LIGHT;
     }
 

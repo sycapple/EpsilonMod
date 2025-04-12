@@ -50,12 +50,10 @@ public class virusPower extends abstractEpsilonPower implements HealthBarRenderP
 
     public void renderAmount(SpriteBatch sb, float x, float y, Color c) {
         super.renderAmount(sb, x, y, c);
-        if (this.amount == 0) {
-            if (!this.isTurnBased) {
-                virusColor.a = c.a;
-                c = virusColor;
-            }
-            FontHelper.renderFontRightTopAligned(sb, FontHelper.powerAmountFont, Integer.toString(this.amount), x, y, this.fontScale, c);
+        if (this.amount >= this.owner.currentHealth) {
+            this.virusColor.a = c.a;
+            c = this.virusColor;
+            FontHelper.renderFontRightTopAligned(sb, FontHelper.powerAmountFont, Integer.toString((int) (this.amount / 2)), x, y + 10, this.fontScale, c);
         }
     }
 

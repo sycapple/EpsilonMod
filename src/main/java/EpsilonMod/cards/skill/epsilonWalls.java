@@ -21,7 +21,7 @@ public class epsilonWalls extends abstractEpsilonCard {
 
     public epsilonWalls() {
         // 为了命名规范修改了变量名。这些参数具体的作用见下方
-        super(ID, true, CARD_STRINGS, COST, TYPE, COLOR, RARITY, TARGET);
+        super(ID, true, CARD_STRINGS, COST, TYPE, RARITY, TARGET);
         this.tags.add(CardTags.STARTER_DEFEND);
         this.setupBlock(5);
     }
