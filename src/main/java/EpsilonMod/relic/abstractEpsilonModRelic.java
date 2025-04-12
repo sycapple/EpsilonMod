@@ -1,6 +1,5 @@
 package EpsilonMod.relic;
 
-import EpsilonMod.colorSet.epsilonColorSet;
 import EpsilonMod.util.epsilonModHelper;
 import basemod.abstracts.CustomRelic;
 import com.megacrit.cardcrawl.helpers.ImageMaster;

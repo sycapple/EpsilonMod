@@ -1,10 +1,12 @@
 package EpsilonMod.util;
 
-import EpsilonMod.actions.allUnitAttackAction;
+import EpsilonMod.modCore.epsilonMod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class epsilonModHelper {
+    public static final Logger logger = LogManager.getLogger(epsilonMod.class.getSimpleName());
+
 
     static String modName = "EpsilonMod";
 

@@ -3,6 +3,7 @@ package EpsilonMod.modCore;
 
 import EpsilonMod.cards.attack.initiate;
 import EpsilonMod.cards.skill.epsilonWalls;
+import EpsilonMod.cards.skill.regenDrugs;
 import EpsilonMod.cards.skill.spookSquad;
 import EpsilonMod.cards.unit.spook;
 import EpsilonMod.characters.Epsilon;
@@ -24,18 +25,15 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.rewards.RewardSave;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.nio.charset.StandardCharsets;
 
 @SpireInitializer
 public class epsilonMod implements EditCardsSubscriber, EditCharactersSubscriber, EditStringsSubscriber, EditRelicsSubscriber, AddAudioSubscriber, StartGameSubscriber, PostInitializeSubscriber, EditKeywordsSubscriber { // 实现接口
-    public static final Logger logger = LogManager.getLogger(epsilonMod.class.getSimpleName());
 
 
     public epsilonMod() {
-        logger.debug("Constructor started.");
+        epsilonModHelper.logger.debug("Constructor started.");
         BaseMod.subscribe(this); // 告诉basemod你要订阅事件
         BaseMod.addColor(abstractCardEnum.EPSILON,
                 epsilonColorSet.epsilonColor, epsilonColorSet.epsilonColor, epsilonColorSet.epsilonColor, epsilonColorSet.epsilonColor, epsilonColorSet.epsilonColor, epsilonColorSet.epsilonColor, epsilonColorSet.epsilonColor,
@@ -48,7 +46,7 @@ public class epsilonMod implements EditCardsSubscriber, EditCharactersSubscriber
                 epsilonColorSet.powerBgPortrait,
                 epsilonColorSet.energyOrbPortrait,
                 epsilonColorSet.cardEnergyOrb);
-        logger.debug("Constructor finished.");
+        epsilonModHelper.logger.debug("Constructor finished.");
     }
 
     public void receivePostInitialize() {
@@ -61,18 +59,18 @@ public class epsilonMod implements EditCardsSubscriber, EditCharactersSubscriber
 
     public static void initialize() {
 
-        logger.info("========================= 开始初始化 =========================");
+        epsilonModHelper.logger.info("========================= 开始初始化 =========================");
         new epsilonMod();
         new allUnitPanel();
         new modConfig();
-        logger.info("========================= 初始化完成 =========================");
+        epsilonModHelper.logger.info("========================= 初始化完成 =========================");
     }
 
     public void receiveAddAudio() {
-        logger.info("========================= 开始加载音效 =========================");
+        epsilonModHelper.logger.info("========================= 开始加载音效 =========================");
         BaseMod.addAudio("SOVIET_SELECT", epsilonModHelper.assetPath("sound/SovietSelect.ogg"));
         BaseMod.addAudio("MIG_BOMBING", epsilonModHelper.assetPath("sound/MigBombing.ogg"));
-        logger.info("========================= 音效加载完毕 =========================");
+        epsilonModHelper.logger.info("========================= 音效加载完毕 =========================");
     }
 
     public void receiveStartGame() {
@@ -82,30 +80,31 @@ public class epsilonMod implements EditCardsSubscriber, EditCharactersSubscriber
     @Override
     public void receiveEditCards() {
         // TODO 这里写添加你卡牌的代码
-        logger.info("========================= 开始加载卡牌 =========================");
+        epsilonModHelper.logger.info("========================= 开始加载卡牌 =========================");
         BaseMod.addCard(new initiate());
         BaseMod.addCard(new epsilonWalls());
         BaseMod.addCard(new spookSquad());
         BaseMod.addCard(new spook());
-        logger.info("========================= 卡牌加载完毕 =========================");
+        BaseMod.addCard(new regenDrugs());
+        epsilonModHelper.logger.info("========================= 卡牌加载完毕 =========================");
     }
 
     public void receiveEditRelics() {
-        logger.info("========================= 开始加载遗物 =========================");
+        epsilonModHelper.logger.info("========================= 开始加载遗物 =========================");
         BaseMod.addRelicToCustomPool(new epsilonEmblem(), abstractCardEnum.EPSILON);
-        logger.info("========================= 遗物加载完毕 =========================");
+        epsilonModHelper.logger.info("========================= 遗物加载完毕 =========================");
     }
 
     @Override
     public void receiveEditCharacters() {
         // 向basemod注册人物
-        logger.info("========================= 开始加载人物 =========================");
+        epsilonModHelper.logger.info("========================= 开始加载人物 =========================");
         BaseMod.addCharacter(new Epsilon(CardCrawlGame.playerName), epsilonModHelper.assetPath("img/character/SovietButton.png"), epsilonModHelper.assetPath("img/character/SovietCover.png"), abstractCharacterEnum.EPSILON);
-        logger.info("========================= 人物加载完毕 =========================");
+        epsilonModHelper.logger.info("========================= 人物加载完毕 =========================");
     }
 
     public void receiveEditKeywords() {
-        logger.info("========================= 加载关键词 =========================");
+        epsilonModHelper.logger.info("========================= 加载关键词 =========================");
         Gson gson = new Gson();
         String lang = "ENG";
         if (Settings.language == Settings.GameLanguage.ZHS) {
@@ -124,7 +123,7 @@ public class epsilonMod implements EditCardsSubscriber, EditCharactersSubscriber
                 BaseMod.addKeyword("EpsilonMod", keyword.NAMES[0], keyword.NAMES, keyword.DESCRIPTION);
             }
         }
-        logger.info("========================= 关键词加载毕 =========================");
+        epsilonModHelper.logger.info("========================= 关键词加载毕 =========================");
     }
 
     public void receiveEditStrings() {

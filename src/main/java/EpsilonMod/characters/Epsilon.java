@@ -3,6 +3,7 @@ package EpsilonMod.characters;
 
 import EpsilonMod.cards.attack.initiate;
 import EpsilonMod.cards.skill.epsilonWalls;
+import EpsilonMod.cards.skill.regenDrugs;
 import EpsilonMod.cards.skill.spookSquad;
 import EpsilonMod.colorSet.epsilonColorSet;
 import EpsilonMod.enums.abstractCardEnum;
@@ -23,7 +24,6 @@ import com.megacrit.cardcrawl.events.city.Vampires;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
-import com.megacrit.cardcrawl.relics.BurningBlood;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 
 import java.util.ArrayList;
@@ -96,6 +96,7 @@ public class Epsilon extends CustomPlayer {
             retVal.add(epsilonWalls.ID);
         }
         retVal.add(spookSquad.ID);
+        retVal.add(regenDrugs.ID);
         return retVal;
     }
 

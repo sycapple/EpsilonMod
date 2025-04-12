@@ -2,10 +2,8 @@ package EpsilonMod.relic;
 
 import EpsilonMod.actions.allUnitAttackAction;
 import EpsilonMod.util.epsilonModHelper;
-import basemod.abstracts.CustomRelic;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 public class epsilonEmblem extends abstractEpsilonModRelic {

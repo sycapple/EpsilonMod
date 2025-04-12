@@ -14,5 +14,9 @@
   "EpsilonMod:spook": {
     "NAME": "精怪",
     "DESCRIPTION": "对随机敌人造成 !D! 点伤害，可使用 !M! 次。"
+  },
+  "EpsilonMod:regenDrugs": {
+    "NAME": "恢复剂",
+    "DESCRIPTION": "增加兵槽中所有单位 !M! 次可攻击次数。"
   }
 }

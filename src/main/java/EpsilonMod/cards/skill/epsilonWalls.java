@@ -17,7 +17,6 @@ public class epsilonWalls extends abstractEpsilonCard {
     private static final AbstractCard.CardType TYPE = AbstractCard.CardType.SKILL;
     private static final AbstractCard.CardRarity RARITY = CardRarity.BASIC;
     private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.SELF;
-    private static final AbstractCard.CardColor COLOR = abstractCardEnum.EPSILON;
 
     public epsilonWalls() {
         // 为了命名规范修改了变量名。这些参数具体的作用见下方

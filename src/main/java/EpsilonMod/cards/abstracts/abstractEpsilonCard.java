@@ -12,7 +12,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import EpsilonMod.colorSet.epsilonColorSet;
 
 public abstract class abstractEpsilonCard extends CustomCard {
     public boolean upgradesecondaryM;
