@@ -2,9 +2,11 @@ package EpsilonMod.modCore;
 
 
 import EpsilonMod.cards.attack.initiate;
+import EpsilonMod.cards.skill.bruteSquad;
 import EpsilonMod.cards.skill.epsilonWalls;
 import EpsilonMod.cards.skill.regenDrugs;
 import EpsilonMod.cards.skill.spookSquad;
+import EpsilonMod.cards.unit.brute;
 import EpsilonMod.cards.unit.spook;
 import EpsilonMod.characters.Epsilon;
 import EpsilonMod.colorSet.epsilonColorSet;
@@ -86,6 +88,8 @@ public class epsilonMod implements EditCardsSubscriber, EditCharactersSubscriber
         BaseMod.addCard(new spookSquad());
         BaseMod.addCard(new spook());
         BaseMod.addCard(new regenDrugs());
+        BaseMod.addCard(new bruteSquad());
+        BaseMod.addCard(new brute());
         epsilonModHelper.logger.info("========================= 卡牌加载完毕 =========================");
     }
 

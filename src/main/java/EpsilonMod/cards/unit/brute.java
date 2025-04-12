@@ -1,30 +1,27 @@
 package EpsilonMod.cards.unit;
 
-
 import EpsilonMod.cards.abstracts.abstractEpsilonUnit;
 import EpsilonMod.util.epsilonModHelper;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class spook extends abstractEpsilonUnit {
-    public static final String ID = epsilonModHelper.makeID(spook.class.getSimpleName());
+public class brute extends abstractEpsilonUnit {
+    public static final String ID = epsilonModHelper.makeID(brute.class.getSimpleName());
     private static final CardStrings CARD_STRINGS = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final AbstractCard.CardTarget TARGET = CardTarget.ALL_ENEMY;
+    public static final CardTarget TARGET = CardTarget.ALL_ENEMY;
 
-    public spook() {
-        // 为了命名规范修改了变量名。这些参数具体的作用见下方
+    public brute() {
         super(ID, true, CARD_STRINGS, TARGET);
-        this.setupDamage(3);
-        this.setupMagicNumber(1);
+        this.setupDamage(5);
+        this.setupMagicNumber(2);
     }
 
 
     @Override
     public void limitedUpgrade() {
-        this.upgradeDamage(2);
+        this.upgradeDamage(3);
         this.upgradeMagicNumber(1);
     }
 

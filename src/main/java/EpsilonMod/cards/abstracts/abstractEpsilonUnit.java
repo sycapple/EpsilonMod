@@ -5,8 +5,8 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 
 public abstract class abstractEpsilonUnit extends abstractEpsilonCard implements epsilonUnit {
 
-    public abstractEpsilonUnit(String ID, boolean useTmpArt, CardStrings strings, int COST, AbstractCard.CardTarget TARGET) {
-        super(ID, useTmpArt, strings, COST, CardType.ATTACK, CardRarity.BASIC, TARGET);
+    public abstractEpsilonUnit(String ID, boolean useTmpArt, CardStrings strings, AbstractCard.CardTarget TARGET) {
+        super(ID, useTmpArt, strings, 0, CardType.ATTACK, CardRarity.BASIC, TARGET);
     }
 
     protected void setupDamage(int amt) {

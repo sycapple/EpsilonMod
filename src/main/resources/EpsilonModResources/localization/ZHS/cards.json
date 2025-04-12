@@ -11,6 +11,10 @@
     "NAME": "精怪小队",
     "DESCRIPTION": "向兵槽中加入 !M! 只精怪"
   },
+  "EpsilonMod:bruteSquad": {
+    "NAME": "狂兽人小队",
+    "DESCRIPTION": "向兵槽中加入 !M! 只狂兽人"
+  },
   "EpsilonMod:spook": {
     "NAME": "精怪",
     "DESCRIPTION": "对随机敌人造成 !D! 点伤害，可使用 !M! 次。"
@@ -18,5 +22,9 @@
   "EpsilonMod:regenDrugs": {
     "NAME": "恢复剂",
     "DESCRIPTION": "增加兵槽中所有单位 !M! 次可攻击次数。"
+  },
+  "EpsilonMod:brute": {
+    "NAME": "狂兽人",
+    "DESCRIPTION": "对随机敌人造成 !D! 点伤害，可使用 !M! 次。 NL 受到各个BUFF的效果翻倍"
   }
 }
