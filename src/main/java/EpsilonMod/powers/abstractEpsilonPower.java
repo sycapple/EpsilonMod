@@ -45,22 +45,11 @@ public abstract class abstractEpsilonPower extends AbstractPower {
             return String.format(epsilonModHelper.assetPath("/img/powers/%s.png"), name.replace(epsilonModHelper.makeID(""), ""));
     }
 
-    public void upgrade() {
-        if (!this.upgraded) {
-            this.limitedUpgrade();
-            this.updateDescription();
-        }
-
-    }
-
     @Override
     public void stackPower(int stackAmount) {
         super.stackPower(stackAmount);
-        if (this.amount > this.limited)
+        if (this.amount > this.limited && this.limited != -1)
             this.amount = this.limited;
-    }
-
-    public void limitedUpgrade() {
     }
 
 }
