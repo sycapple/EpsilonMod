@@ -26,5 +26,9 @@
   "EpsilonMod:brute": {
     "NAME": "狂兽人",
     "DESCRIPTION": "对随机敌人造成 !D! 点伤害，可使用 !M! 次。 NL 受到各个BUFF的效果翻倍"
+  },
+  "EpsilonMod:geneburst": {
+    "NAME": "基因震爆",
+    "DESCRIPTION": "将卡槽中的所有单位转化为狂兽人 NL 狂兽人将恢复使用次数"
   }
 }
