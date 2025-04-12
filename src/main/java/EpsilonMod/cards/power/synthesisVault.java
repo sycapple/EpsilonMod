@@ -3,7 +3,6 @@ package EpsilonMod.cards.power;
 import EpsilonMod.cards.abstracts.abstractEpsilonCard;
 import EpsilonMod.powers.synthesisVaultPower;
 import EpsilonMod.util.epsilonModHelper;
-import EpsilonMod.util.unitPileManager;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -30,7 +29,6 @@ public class synthesisVault extends abstractEpsilonCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        unitPileManager.addMaxUnit(this.magicNumber);
         this.applyToPlayer(new synthesisVaultPower(p, this.magicNumber));
     }
 }

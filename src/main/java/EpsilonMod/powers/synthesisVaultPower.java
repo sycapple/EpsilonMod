@@ -17,7 +17,7 @@ public class synthesisVaultPower extends abstractEpsilonPower {
     private final static PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public synthesisVaultPower(AbstractCreature owner, int amount) {
-        super(powerStrings, POWER_ID, true, owner, amount);
+        super(powerStrings, POWER_ID, true, owner, amount, 40);
         this.type = PowerType.BUFF;
         this.updateDescription();
     }
@@ -29,7 +29,21 @@ public class synthesisVaultPower extends abstractEpsilonPower {
         FontHelper.renderFontRightTopAligned(sb, FontHelper.powerAmountFont, Integer.toString(unitPileManager.getMaxUnit()), x, y + 10, this.fontScale, c);
     }
 
+    @Override
+    public void stackPower(int stackAmount) {
+        super.stackPower(stackAmount);
+        if (this.amount >= 40)
+            this.amount = 40;
+        unitPileManager.setMaxUnit(this.amount + unitPileManager.getInitialMaxUnit());
+    }
+
+    @Override
+    public void onInitialApplication() {
+        super.onInitialApplication();
+        unitPileManager.setMaxUnit(this.amount + unitPileManager.getInitialMaxUnit());
+    }
+
     public void updateDescription() {
-        this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + unitPileManager.getMaxUnit();
+        this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + (unitPileManager.getInitialMaxUnit() + this.amount);
     }
 }

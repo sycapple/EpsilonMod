@@ -17,11 +17,14 @@ public abstract class abstractEpsilonPower extends AbstractPower {
     protected Color greenColor = new Color(0.0F, 1.0F, 0.0F, 1.0F);
 
 
-    public abstractEpsilonPower(PowerStrings powerStrings, String POWER_ID, boolean ifTmpArt, AbstractCreature owner, int amount) {
+    public abstractEpsilonPower(PowerStrings powerStrings, String POWER_ID, boolean ifTmpArt, AbstractCreature owner, int amount, int limited) {
         this.name = powerStrings.NAME;
         this.ID = POWER_ID;
         this.owner = owner;
         this.amount = amount;
+        if (this.amount >= limited && limited != -1) {
+            this.amount = limited;
+        }
         DESCRIPTIONS = powerStrings.DESCRIPTIONS;
         String path128 = get128ImgPath(ifTmpArt, this.name);
         String path48 = get48ImgPath(ifTmpArt, this.name);

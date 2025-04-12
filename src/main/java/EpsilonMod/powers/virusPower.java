@@ -21,7 +21,7 @@ public class virusPower extends abstractEpsilonPower implements HealthBarRenderP
     private final static PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public virusPower(AbstractCreature owner, AbstractCreature source, int amount) {
-        super(powerStrings, POWER_ID, true, owner, amount);
+        super(powerStrings, POWER_ID, true, owner, amount, -1);
         this.type = PowerType.DEBUFF;
         this.isTurnBased = true;
         this.source = source;

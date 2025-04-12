@@ -20,6 +20,14 @@ public class unitPileManager {
 
     public static void addMaxUnit(int a) {
         playerHasUnitPilePatch.unitPileField.maxUnit.set(AbstractDungeon.player, Math.min(getMaxUnit() + a, playerHasUnitPilePatch.maxUnitAvailable));
+        if (getMaxUnit() + a >= playerHasUnitPilePatch.maxUnitAvailable)
+            sayIsFull();
+    }
+
+    public static void setMaxUnit(int a) {
+        playerHasUnitPilePatch.unitPileField.maxUnit.set(AbstractDungeon.player, Math.min(a, playerHasUnitPilePatch.maxUnitAvailable));
+        if (a >= playerHasUnitPilePatch.maxUnitAvailable)
+            sayIsFull();
     }
 
     public static void resetMaxUnit() {
@@ -33,6 +41,10 @@ public class unitPileManager {
 
     public static Integer getMaxUnit() {
         return (Integer) playerHasUnitPilePatch.unitPileField.maxUnit.get(AbstractDungeon.player);
+    }
+
+    public static Integer getInitialMaxUnit() {
+        return (Integer) playerHasUnitPilePatch.maxUnitInitial;
     }
 
 
