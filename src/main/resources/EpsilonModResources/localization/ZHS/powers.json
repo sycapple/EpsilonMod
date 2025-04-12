@@ -6,5 +6,12 @@
       "点伤害, 死亡后所有敌人增加",
       "点 病毒值 "
     ]
+  },
+  "EpsilonMod:synthesisVaultPower": {
+    "NAME": "合成缸",
+    "DESCRIPTIONS": [
+      "增加",
+      "个兵槽单个上限,目前兵槽单位上限为"
+    ]
   }
 }

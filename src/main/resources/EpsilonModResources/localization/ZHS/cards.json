@@ -30,5 +30,9 @@
   "EpsilonMod:geneburst": {
     "NAME": "基因震爆",
     "DESCRIPTION": "将卡槽中的所有单位转化为狂兽人 NL 狂兽人将恢复使用次数"
+  },
+  "EpsilonMod:synthesisVault": {
+    "NAME": "合成缸",
+    "DESCRIPTION": "增加 !M! 点兵槽单位上限"
   }
 }

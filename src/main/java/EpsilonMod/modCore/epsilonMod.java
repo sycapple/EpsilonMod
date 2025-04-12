@@ -2,6 +2,7 @@ package EpsilonMod.modCore;
 
 
 import EpsilonMod.cards.attack.initiate;
+import EpsilonMod.cards.power.synthesisVault;
 import EpsilonMod.cards.skill.*;
 import EpsilonMod.cards.unit.brute;
 import EpsilonMod.cards.unit.spook;
@@ -88,6 +89,7 @@ public class epsilonMod implements EditCardsSubscriber, EditCharactersSubscriber
         BaseMod.addCard(new bruteSquad());
         BaseMod.addCard(new brute());
         BaseMod.addCard(new geneburst());
+        BaseMod.addCard(new synthesisVault());
         epsilonModHelper.logger.info("========================= 卡牌加载完毕 =========================");
     }
 

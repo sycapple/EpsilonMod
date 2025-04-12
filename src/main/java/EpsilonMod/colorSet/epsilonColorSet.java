@@ -4,7 +4,7 @@ import EpsilonMod.util.epsilonModHelper;
 import com.badlogic.gdx.graphics.Color;
 
 public class epsilonColorSet {
-    public static Color epsilonColor = new Color((float) 122 / 255, (float) 81 / 255, (float) 168 / 255, 1f);
+    public static Color epsilonColor = new Color(0x7a51a8ff);
     public static String attackBg = epsilonModHelper.assetPath("img/UI/Card/512/bg_attack_lime.png");
     public static String skillBg = epsilonModHelper.assetPath("img/UI/Card/512/bg_skill_lime.png");
     public static String powerBg = epsilonModHelper.assetPath("img/UI/Card/512/bg_power_lime.png");
