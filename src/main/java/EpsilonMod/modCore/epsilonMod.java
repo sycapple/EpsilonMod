@@ -6,8 +6,10 @@ import EpsilonMod.cards.power.synthesisVault;
 import EpsilonMod.cards.skill.*;
 import EpsilonMod.cards.unit.brute;
 import EpsilonMod.cards.unit.spook;
+import EpsilonMod.cards.unit.virusSniperUnit;
 import EpsilonMod.characters.Epsilon;
 import EpsilonMod.colorSet.epsilonColorSet;
+import EpsilonMod.dynamicVariable.secondaryMagicNumber;
 import EpsilonMod.enums.abstractCardEnum;
 import EpsilonMod.enums.abstractCharacterEnum;
 import EpsilonMod.enums.abstractEpsilonRewardsEnum;
@@ -50,6 +52,7 @@ public class epsilonMod implements EditCardsSubscriber, EditCharactersSubscriber
     }
 
     public void receivePostInitialize() {
+        BaseMod.addDynamicVariable(new secondaryMagicNumber());
         BaseMod.registerCustomReward(abstractEpsilonRewardsEnum.EPSILON_CARD_REWARD, (rewardSave) -> {
             epsilonCardReward db = new epsilonCardReward();
             return db;
@@ -58,7 +61,6 @@ public class epsilonMod implements EditCardsSubscriber, EditCharactersSubscriber
     }
 
     public static void initialize() {
-
         epsilonModHelper.logger.info("========================= 开始初始化 =========================");
         new epsilonMod();
         new allUnitPanel();
@@ -90,6 +92,8 @@ public class epsilonMod implements EditCardsSubscriber, EditCharactersSubscriber
         BaseMod.addCard(new brute());
         BaseMod.addCard(new geneburst());
         BaseMod.addCard(new synthesisVault());
+        BaseMod.addCard(new virusSniperUnit());
+        BaseMod.addCard(new virusSniper());
         epsilonModHelper.logger.info("========================= 卡牌加载完毕 =========================");
     }
 

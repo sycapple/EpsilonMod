@@ -11,6 +11,14 @@
     "NAME": "精怪小队",
     "DESCRIPTION": "向兵槽中加入 !M! 只精怪"
   },
+  "EpsilonMod:virusSniper": {
+    "NAME": "病毒狙击手",
+    "DESCRIPTION": "向兵槽中加入 !M! 只病毒狙击手"
+  },
+  "EpsilonMod:virusSniperUnit": {
+    "NAME": "病毒狙击手",
+    "DESCRIPTION": "每回合向随机敌人给予 !SM! 层 病毒 NL 可使用 !M! 次"
+  },
   "EpsilonMod:bruteSquad": {
     "NAME": "狂兽人小队",
     "DESCRIPTION": "向兵槽中加入 !M! 只狂兽人"

@@ -14,8 +14,11 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public abstract class abstractEpsilonCard extends CustomCard {
-    public boolean upgradesecondaryM;
+    public boolean upgradeSecondaryM;
     public int secondaryM;
+    public boolean isUpgradeSecondaryM;
+    public boolean isModifiedSecondaryM;
+    public int baseSecondaryM;
     public AbstractGameAction.AttackEffect effect;
 
     public abstractEpsilonCard(String ID, boolean useTmpArt, CardStrings strings, int COST, AbstractCard.CardType TYPE, AbstractCard.CardRarity RARITY, AbstractCard.CardTarget TARGET) {
@@ -86,6 +89,7 @@ public abstract class abstractEpsilonCard extends CustomCard {
 
 
     protected void setupSecondaryMagicNumber(int amt) {
+        this.baseSecondaryM = amt;
         this.secondaryM = amt;
     }
 
@@ -143,6 +147,9 @@ public abstract class abstractEpsilonCard extends CustomCard {
         }
     }
 
+    public void applyToRandomEnemies(AbstractPower power, int amount) {
+        this.addToBot(new ApplyPowerToRandomEnemyAction(AbstractDungeon.player, power, amount));
+    }
 
     public void limitedUpgrade() {
     }
@@ -150,7 +157,7 @@ public abstract class abstractEpsilonCard extends CustomCard {
 
     protected void upgradeSecondaryM(int amount) {
         this.secondaryM += amount;
-        this.upgradesecondaryM = true;
+        this.upgradeSecondaryM = true;
     }
 
 

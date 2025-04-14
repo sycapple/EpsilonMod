@@ -1,11 +1,11 @@
 package EpsilonMod.cards.abstracts;
 
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.localization.CardStrings;
 
 public abstract class abstractEpsilonUnit extends abstractEpsilonCard implements epsilonUnit {
+    private static final CardStrings CARD_STRINGS = null;
 
-    public abstractEpsilonUnit(String ID, boolean useTmpArt, CardStrings strings, AbstractCard.CardTarget TARGET) {
+    public abstractEpsilonUnit(String ID, boolean useTmpArt, CardStrings strings, CardTarget TARGET) {
         super(ID, useTmpArt, strings, 0, CardType.ATTACK, CardRarity.BASIC, TARGET);
     }
 
