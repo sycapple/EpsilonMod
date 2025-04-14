@@ -94,6 +94,7 @@ public class epsilonMod implements EditCardsSubscriber, EditCharactersSubscriber
         BaseMod.addCard(new synthesisVault());
         BaseMod.addCard(new virusSniperUnit());
         BaseMod.addCard(new virusSniper());
+        BaseMod.addCard(new bloatick());
         epsilonModHelper.logger.info("========================= 卡牌加载完毕 =========================");
     }
 

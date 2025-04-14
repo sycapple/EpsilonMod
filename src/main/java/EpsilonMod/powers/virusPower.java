@@ -69,4 +69,7 @@ public class virusPower extends abstractEpsilonPower implements HealthBarRenderP
         this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + (int) (this.amount * 0.5) + DESCRIPTIONS[2];
     }
 
+    public abstractEpsilonPower copy() {
+        return new virusPower(this.owner, this.source, this.amount);
+    }
 }

@@ -17,6 +17,8 @@ public abstract class abstractEpsilonPower extends AbstractPower {
     protected Color greenColor = new Color(0.0F, 1.0F, 0.0F, 1.0F);
     private int limited;
 
+    public abstract abstractEpsilonPower copy();
+
     public abstractEpsilonPower(PowerStrings powerStrings, String POWER_ID, boolean ifTmpArt, AbstractCreature owner, int amount, int limited) {
         this.name = powerStrings.NAME;
         this.ID = POWER_ID;

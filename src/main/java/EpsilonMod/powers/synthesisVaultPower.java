@@ -22,6 +22,10 @@ public class synthesisVaultPower extends abstractEpsilonPower {
         this.updateDescription();
     }
 
+    public abstractEpsilonPower copy() {
+        return new synthesisVaultPower(this.owner, this.amount);
+    }
+
     public void renderAmount(SpriteBatch sb, float x, float y, Color c) {
         super.renderAmount(sb, x, y, c);
         synthesisVaultPowerColor.a = c.a;

@@ -19,6 +19,10 @@
     "NAME": "病毒狙击手",
     "DESCRIPTION": "每回合向随机敌人给予 !SM! 层 病毒 NL 可使用 !M! 次"
   },
+  "EpsilonMod:bloatick": {
+    "NAME": "毒爆虱",
+    "DESCRIPTION": "对所有敌人造成 !M! 点 病毒 "
+  },
   "EpsilonMod:bruteSquad": {
     "NAME": "狂兽人小队",
     "DESCRIPTION": "向兵槽中加入 !M! 只狂兽人"

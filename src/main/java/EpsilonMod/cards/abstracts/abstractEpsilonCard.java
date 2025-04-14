@@ -1,5 +1,6 @@
 package EpsilonMod.cards.abstracts;
 
+import EpsilonMod.actions.applyPowerToAllEnemyAction;
 import EpsilonMod.enums.abstractCardEnum;
 import EpsilonMod.util.epsilonModHelper;
 import basemod.abstracts.CustomCard;
@@ -149,6 +150,10 @@ public abstract class abstractEpsilonCard extends CustomCard {
 
     public void applyToRandomEnemies(AbstractPower power, int amount) {
         this.addToBot(new ApplyPowerToRandomEnemyAction(AbstractDungeon.player, power, amount));
+    }
+
+    public void applyToAllEnemies(AbstractPower power, int amount) {
+        this.addToBot(new applyPowerToAllEnemyAction(AbstractDungeon.player, power, amount));
     }
 
     public void limitedUpgrade() {
